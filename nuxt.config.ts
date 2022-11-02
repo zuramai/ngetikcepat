@@ -12,6 +12,11 @@ export default defineNuxtConfig({
             'postcss-nesting': {}
         }
     },
+    vue: {
+        compilerOptions: {
+          isCustomElement: tag => ['letter'].includes(tag)
+        }
+    },
     unocss: {
         // core options
         shortcuts: [],

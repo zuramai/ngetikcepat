@@ -4,7 +4,8 @@ const now = new Date()
 <template>
     <footer>
         <p class="text-center">
-            Copyright &copy; {{ now.getFullYear() }} Crafted by zuramai
+            Copyright &copy; {{ now.getFullYear() }} Crafted by 
+            <a href="https://github.com/zuramai" target="_blank" class="underline">zuramai</a>
         </p>
     </footer>
 </template>
