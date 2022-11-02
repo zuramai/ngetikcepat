@@ -1,0 +1,10 @@
+body {
+    background-color: var(--bg-color);
+}
+a {
+    color: var(--sub-color);
+
+    &:hover {
+        color: white;
+    }
+}
