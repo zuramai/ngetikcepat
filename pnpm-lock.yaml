@@ -5,9 +5,13 @@ specifiers:
   '@unocss/nuxt': ^0.46.2
   '@unocss/preset-icons': ^0.46.2
   '@unocss/preset-web-fonts': ^0.46.2
+  normalize.css: ^8.0.1
   nuxt: 3.0.0-rc.12
   postcss-nesting: ^10.2.0
   unplugin-icons: ^0.14.13
+
+dependencies:
+  normalize.css: 8.0.1
 
 devDependencies:
   '@iconify-json/mdi': 1.1.34
@@ -3267,6 +3271,10 @@ packages:
     resolution: {integrity: sha512-DlL+XwOy3NxAQ8xuC0okPgK46iuVNAK01YN7RueYBqqFeGsBjV9XmCAzAdgt+667bCl5kPh9EqKKDwnaPG1I7A==}
     engines: {node: '>=10'}
     dev: true
+
+  /normalize.css/8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
+    dev: false
 
   /npm-run-path/4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}

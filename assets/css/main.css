@@ -3,7 +3,9 @@ body {
 }
 a {
     color: var(--sub-color);
-
+    text-decoration: none;
+    transition: all .1s;
+    
     &:hover {
         color: white;
     }

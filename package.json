@@ -15,5 +15,8 @@
     "nuxt": "3.0.0-rc.12",
     "postcss-nesting": "^10.2.0",
     "unplugin-icons": "^0.14.13"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }
