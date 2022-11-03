@@ -1,3 +1,6 @@
+@import "./_variables.css";
+@import "./animation.css";
+
 body {
     background-color: var(--bg-color);
     color: var(--sub-color)
