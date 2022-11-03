@@ -26,7 +26,7 @@ const typingData = reactive({
 const currentWord = computed(() => words[typingData.currentWord].text)
 
 const isTypingLastLetter = computed(() => {
-    if(typingData.currentLetter == currentWord.value.length) {
+    if(typingData.currentLetter >= currentWord.value.length) {
         return true
     }
     return false
@@ -76,9 +76,12 @@ const caretStyles = computed(() => {
 
 const keydown = (e: KeyboardEvent) => {
 
-    if (e.key == ' ') {
-        e.preventDefault() // prevent scrolling on space
+    if ([' ', "'"].includes(e.key)) {
+        console.log(e.key)
+        e.preventDefault() 
+    }
 
+    if (e.key == ' ') {
         // move to the next word
         typingData.currentLetter = 0
         typingData.currentWord++
@@ -93,15 +96,19 @@ const keydown = (e: KeyboardEvent) => {
             typingData.currentLetter = currentWord.value.length-1
             typingData.currentlyTyping = typingData.typedWord[typingData.currentWord]
             return
-        } 
+        }
+        const str = typingData.currentlyTyping
+        typingData.currentlyTyping = str.slice(0, str.length-1) + str.slice(str.length, str.length)
         typingData.currentLetter--
         return
     }
 
     if(['Shift', 'Control'].includes(e.key)) return
-    
-    typingData.currentLetter++
-    typingData.currentlyTyping += e.key
+
+    if(isTypingLastLetter && e.key !== ' ') {
+        typingData.currentLetter++
+        typingData.currentlyTyping += e.key
+    }
 
 }
 
@@ -132,8 +139,33 @@ onMounted(() => {
             })
         })
 })
-const setRef = (wordIndex, letterIndex, el) => {
-    words[wordIndex].letters[letterIndex].el = el
+const getLetterStyle = (wordIndex, letterWordIndex) => {
+    const word = words[wordIndex]
+    let letterIndex = 0
+
+    for(let i = 0; i < wordIndex; i++) {
+        letterIndex += words[i].text.length  + 1
+    }
+    letterIndex += letterWordIndex
+
+    const typedLetter = typingData.currentlyTyping.split(' ').join()
+    const isCorrect = typedLetter[letterIndex] == word.text[letterWordIndex]
+
+
+    let color = "white"
+
+    // If the user typed wrong letter
+    console.log(typedLetter[letterIndex], word.text[letterWordIndex], letterIndex)
+    if(typedLetter[letterIndex]) {
+        color = isCorrect ? "var(--color-main)" : "var(--error-color)" 
+    } 
+    
+    return {
+        color
+    }
+}
+const isLetterTypedCorrectly = (word) => {
+
 }
 </script>
 <template>
@@ -142,7 +174,9 @@ const setRef = (wordIndex, letterIndex, el) => {
             <div class="words flex flex-wrap  h-[230px] overflow-hidden" ref="wordsWrapper">
                 <div class="caret" :style="caretStyles"></div>
                 <div class="word py-2 mr-4" v-for="(word, wordIndex) in words" :ref="(el) => words[wordIndex].el = (el as HTMLElement)" >
-                    <letter v-for="(letter, letterIndex) in word.letters" :ref="(el) => setRef(wordIndex, letterIndex, el)">
+                    <letter v-for="(letter, letterIndex) in word.letters" 
+                            :ref="(el) => words[wordIndex].letters[letterIndex].el = el"
+                            :style="getLetterStyle(wordIndex, letterIndex)">
                         {{ letter.text }}
                     </letter>
                 </div>
@@ -161,6 +195,6 @@ const setRef = (wordIndex, letterIndex, el) => {
     width: .1em;
     border-radius: var(--roundness);
     background-color: var(--caret-color);
-    transition: all .1s;
+    transition: all .2s;
 }
 </style>
