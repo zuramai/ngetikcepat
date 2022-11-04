@@ -141,8 +141,9 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
 }
 </script>
 <template>
-    <div class="typing-area md:w-2/3 mx-auto my-10 select-none p-10  text-6xl " @keydown="keydown" tabindex="0">
-            <div class="words flex flex-wrap  h-[230px] overflow-hidden" ref="wordsWrapper">
+    <div class="typing-area w-full md:w-2/3 mx-auto my-10 select-none p-10  text-6xl " @keydown="keydown" tabindex="0">
+        <div class="words-wrapper overflow-hidden  h-[230px]">
+            <div class="words flex flex-wrap " ref="wordsWrapper">
                 <div class="caret" :style="caretStyles"></div>
                 <div class="word py-2 mr-4" v-for="(word, wordIndex) in words" :ref="(el) => words[wordIndex].el = (el as HTMLElement)" >
                     <letter v-for="(letter, letterIndex) in word.letters" 
@@ -152,6 +153,7 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
                     </letter>
                 </div>
            </div>
+        </div>
         </div>
 </template>
 <style>
