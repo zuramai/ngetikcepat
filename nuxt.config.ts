@@ -6,6 +6,7 @@ import presetIcon from '@unocss/preset-icons'
 export default defineNuxtConfig({
     modules: [
         '@unocss/nuxt',
+        '@pinia/nuxt',
     ],
     postcss: {
         plugins: {

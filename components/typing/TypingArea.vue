@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Word } from '~/types/typing';
-
+import { useTypingStore } from '~/store/typing'
+import { storeToRefs } from 'pinia'
 
 const { words } = defineProps<{
     words: Word[]
@@ -24,7 +25,8 @@ const isTypingLastLetter = computed(() => {
 const isMounted = ref(false)
 
 // For caret animation
-const isTyping = ref(false)
+const typingStore = useTypingStore()
+const { isTyping } = storeToRefs(typingStore)
 let timerBeforeStopTyping
 
 const letterPosition = computed(() => {
