@@ -15,6 +15,11 @@ const isMounted = ref(false)
 const quotes = ref<Quotes>()
 const chosenQuote = ref<Quote>()
 
+// For caret animation
+const isTyping = ref(false)
+let timerBeforeStopTyping
+
+
 const words = reactive<Word[]>([])
 const wordsWrapper = ref()
 const typingData = reactive({
@@ -32,16 +37,13 @@ const isTypingLastLetter = computed(() => {
     return false
 })
 
+
 const letterPosition = computed(() => {
     const zero = () => ({ left: 0, top: 0, right: 0, bottom: 0 }) 
 
-    if(!isMounted || 
-        !words[typingData.currentWord]) 
+    if(!isMounted || !words[typingData.currentWord]) 
         return zero()
 
-    // if(typingData.currentLetter == currentWord.value.length)
-    // !words[typingData.currentWord]?.letters[typingData.currentLetter]
-    
     let letter = words[typingData.currentWord]?.letters[typingData.currentLetter]
     if(isTypingLastLetter.value) {
         const prevLetter =  words[typingData.currentWord]?.letters[typingData.currentLetter-1].el
@@ -66,9 +68,11 @@ const caretStyles = computed(() => {
         left: letterPosition.value.left + 'px',
         top: letterPosition.value.top + 10 + 'px',
     }
+
+    let animationName = isTyping.value ? 'none' : 'caretFlash'
     
     return {
-        animation: 'caretFlash .5s ease-in-out infinite alternate',
+        animation: `${animationName} .5s ease-in-out infinite alternate`,
         ...positionMap
     }
 })
@@ -108,7 +112,15 @@ const keydown = (e: KeyboardEvent) => {
     if(isTypingLastLetter && e.key !== ' ') {
         typingData.currentLetter++
         typingData.currentlyTyping += e.key
+
+        isTyping.value = true
+        clearTimeout(timerBeforeStopTyping)
+        timerBeforeStopTyping = setTimeout(() => {
+            isTyping.value = false 
+        }, 2000)
     }
+
+    
 
 }
 
@@ -152,12 +164,12 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
     const isCorrect = typedLetter[letterIndex] == word.text[letterWordIndex]
 
 
-    let color = "white"
+    let color = "var(--sub-color)"
 
     // If the user typed wrong letter
     console.log(typedLetter[letterIndex], word.text[letterWordIndex], letterIndex)
     if(typedLetter[letterIndex]) {
-        color = isCorrect ? "var(--color-main)" : "var(--error-color)" 
+        color = isCorrect ? "var(--main-color)" : "var(--error-color)" 
     } 
     
     return {
