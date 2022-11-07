@@ -7,6 +7,9 @@ const { words } = defineProps<{
     words: Word[]
 }>()
 
+const wordsGroup = ref<HTMLElement>()
+const wordsWrapper = ref<HTMLElement>()
+
 const typingData = reactive({
     currentWord: 0, // word index
     currentLetter: 0, // letter index from the word
@@ -27,8 +30,9 @@ const isMounted = ref(false)
 // For caret animation
 const typingStore = useTypingStore()
 const { isTyping } = storeToRefs(typingStore)
-let timerBeforeStopTyping
+let timerBeforeStopTyping: NodeJS.Timeout
 
+// Get current letter position
 const letterPosition = computed(() => {
     const zero = () => ({ left: 0, top: 0, right: 0, bottom: 0 }) 
 
@@ -36,28 +40,32 @@ const letterPosition = computed(() => {
         return zero()
 
     let letter = words[typingData.currentWord]?.letters[typingData.currentLetter]
+
     if(isTypingLastLetter.value) {
         const prevLetter =  words[typingData.currentWord]?.letters[typingData.currentLetter-1].el
-        const prevLetterRect = prevLetter.getBoundingClientRect()
+        const prevLetterRect = {left: prevLetter.offsetLeft, top: prevLetter.offsetTop, width: prevLetter.offsetWidth}
 
         return {
-            left: prevLetterRect.left + prevLetterRect.width,
-            top: prevLetterRect.top 
+            left: prevLetterRect.left + prevLetter.parentElement.parentElement.offsetLeft + prevLetterRect.width,
+            top: prevLetterRect.top - prevLetter.parentElement.offsetTop
         }
     }
 
     const rect = letter?.el?.getBoundingClientRect()
     if (!rect) return zero()
+    console.log('offsetleft',letter.el.offsetLeft )
 
-    return rect
+    return {
+        left: letter.el.offsetLeft - letter.el.parentElement.parentElement.offsetLeft,
+        top: letter.el.offsetTop - letter.el.parentElement.offsetTop
+    }
 })
 
-
+// Caret styles (position and animation)
 const caretStyles = computed(() => {
-    console.log(letterPosition.value)
     const positionMap = {
         left: letterPosition.value.left + 'px',
-        top: letterPosition.value.top + 10 + 'px',
+        top: 0 + 'px',
     }
 
     let animationName = isTyping.value ? 'none' : 'caretFlash'
@@ -68,11 +76,16 @@ const caretStyles = computed(() => {
     }
 })
 
+const wordsGroupStyle = computed(() => {
+    console.log(letterPosition.value)
+    return {
+        top: (letterPosition.value.top ) + 'px'
+    }
+})
 
 const keydown = (e: KeyboardEvent) => {
 
     if ([' ', "'"].includes(e.key)) {
-        console.log(e.key)
         e.preventDefault() 
     }
 
@@ -85,16 +98,15 @@ const keydown = (e: KeyboardEvent) => {
     }
     
     if (e.key == 'Backspace') {
+        const str = typingData.currentlyTyping
         if(typingData.currentLetter == 0) {
             // Back to prev word
             typingData.currentWord--
-            typingData.currentLetter = currentWord.value.length-1
-            typingData.currentlyTyping = typingData.typedWord[typingData.currentWord]
-            return
+            typingData.currentLetter = currentWord.value.length
+        } else {
+            typingData.currentLetter--
         }
-        const str = typingData.currentlyTyping
-        typingData.currentlyTyping = str.slice(0, str.length-1) + str.slice(str.length, str.length)
-        typingData.currentLetter--
+        typingData.currentlyTyping = str.slice(0, -1)
         return
     }
 
@@ -108,7 +120,6 @@ const keydown = (e: KeyboardEvent) => {
         typingData.currentLetter++
         typingData.currentlyTyping += e.key
 
-        console.log(isTypingLastLetter.value, e.key, isTypingLastLetter.value && e.key !== ' ')
         isTyping.value = true
         clearTimeout(timerBeforeStopTyping)
         timerBeforeStopTyping = setTimeout(() => {
@@ -120,18 +131,11 @@ const keydown = (e: KeyboardEvent) => {
 
 const getLetterStyle = (wordIndex, letterWordIndex) => {
     const word = words[wordIndex]
-    let letterIndex = 0
-    
-    for(let i = 0; i < wordIndex; i++) {
-        letterIndex += words[i].text.length  + 1
-    }
-    letterIndex += letterWordIndex
 
-    // const typedLetter = typingData.currentlyTyping.split(' ').join()
-    // const isCorrect = typedLetter[letterIndex] == word.text[letterWordIndex]
     const typedLetters = typingData.currentlyTyping.split(' ')
     let color = "var(--sub-color)"
     let isCorrect = false
+
     if(typedLetters[wordIndex] && typedLetters[wordIndex][letterWordIndex]) {
         isCorrect = typedLetters[wordIndex][letterWordIndex] == word.text[letterWordIndex]
         color = isCorrect ? "var(--main-color)" : "var(--error-color)" 
@@ -144,8 +148,8 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
 </script>
 <template>
     <div class="typing-area w-full md:w-2/3 mx-auto my-10 select-none p-10  text-6xl " @keydown="keydown" tabindex="0">
-        <div class="words-wrapper overflow-hidden  h-[230px]">
-            <div class="words flex flex-wrap " ref="wordsWrapper">
+        <div class="words-wrapper overflow-hidden  relative h-[230px]" ref="wordsWrapper">
+            <div class="words flex flex-wrap  absolute" ref="wordsGroup" :style="wordsGroupStyle">
                 <div class="caret" :style="caretStyles"></div>
                 <div class="word py-2 mr-4" v-for="(word, wordIndex) in words" :ref="(el) => words[wordIndex].el = (el as HTMLElement)" >
                     <letter v-for="(letter, letterIndex) in word.letters" 
