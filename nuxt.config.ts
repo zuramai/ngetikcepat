@@ -29,7 +29,7 @@ export default defineNuxtConfig({
             presetUno(),
             presetWebFonts({
                 fonts: {
-                    sans: 'Mukta'
+                    sans: 'Oxygen'
                 }
             })
         ]
