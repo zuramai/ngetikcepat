@@ -37,7 +37,5 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div class="container mx-auto" >
-        <TypingArea :words="words"></TypingArea>
-    </div>
+    <TypingArea :words="words"></TypingArea>
 </template>
