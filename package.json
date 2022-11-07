@@ -1,5 +1,10 @@
 {
-  "private": true,
+  "name": "speedtyper",
+  "homepage": "https://github.com/zuramai/speedtyper#readme",
+  "description": "Test your typing skills and race with your friends!",
+  "bugs": {
+    "url" : "https://github.com/zuramai/speedtyper/issues"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -20,5 +25,15 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.1"
+  },
+  "license" : "BSD-3-Clause",
+  "author": {
+    "name" : "Saugi",
+    "email" : "saugi.dev@gmail.com",
+    "url" : "https://github.com/zuramai/"
+  },
+  "funding": {
+    "type" : "individual",
+    "url" : "https://github.com/sponsors/zuramai/"
   }
 }
