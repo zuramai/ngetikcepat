@@ -24,10 +24,10 @@
                             <nuxt-link to="/">Home</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/">Race</nuxt-link>
+                            <nuxt-link to="/race">Race</nuxt-link>
                         </li>
                         <li>
-                            <nuxt-link to="/">Learn</nuxt-link>
+                            <nuxt-link to="/learn">Learn</nuxt-link>
                         </li>
                     </ul>
                 </div>
@@ -52,4 +52,7 @@
 </template>
 
 <style scoped>
+.router-link-active {
+    color: rgb(206, 206, 206)
+}
 </style>

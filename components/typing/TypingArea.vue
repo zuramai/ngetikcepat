@@ -100,40 +100,40 @@ const keydown = (e: KeyboardEvent) => {
 
     if(['Shift', 'Control'].includes(e.key)) return
 
-    if(isTypingLastLetter && e.key !== ' ') {
+    if(isTypingLastLetter.value && e.key !== ' ') {
+        return
+    }
+
+    if(!isTypingLastLetter.value) {
         typingData.currentLetter++
         typingData.currentlyTyping += e.key
 
+        console.log(isTypingLastLetter.value, e.key, isTypingLastLetter.value && e.key !== ' ')
         isTyping.value = true
         clearTimeout(timerBeforeStopTyping)
         timerBeforeStopTyping = setTimeout(() => {
             isTyping.value = false 
         }, 2000)
     }
-
-    
-
 }
 
 
 const getLetterStyle = (wordIndex, letterWordIndex) => {
     const word = words[wordIndex]
     let letterIndex = 0
-
+    
     for(let i = 0; i < wordIndex; i++) {
         letterIndex += words[i].text.length  + 1
     }
     letterIndex += letterWordIndex
 
-    const typedLetter = typingData.currentlyTyping.split(' ').join()
-    const isCorrect = typedLetter[letterIndex] == word.text[letterWordIndex]
-
-
+    // const typedLetter = typingData.currentlyTyping.split(' ').join()
+    // const isCorrect = typedLetter[letterIndex] == word.text[letterWordIndex]
+    const typedLetters = typingData.currentlyTyping.split(' ')
     let color = "var(--sub-color)"
-
-    // If the user typed wrong letter
-    console.log(typedLetter[letterIndex], word.text[letterWordIndex], letterIndex)
-    if(typedLetter[letterIndex]) {
+    let isCorrect = false
+    if(typedLetters[wordIndex] && typedLetters[wordIndex][letterWordIndex]) {
+        isCorrect = typedLetters[wordIndex][letterWordIndex] == word.text[letterWordIndex]
         color = isCorrect ? "var(--main-color)" : "var(--error-color)" 
     } 
     
@@ -168,6 +168,6 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
     width: .1em;
     border-radius: var(--roundness);
     background-color: var(--caret-color);
-    transition: all .2s;
+    transition: all .1s;
 }
 </style>
