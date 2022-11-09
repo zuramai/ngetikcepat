@@ -47,25 +47,25 @@ const letterPosition = computed(() => {
 
         return {
             left: prevLetterRect.left + prevLetter.parentElement.parentElement.offsetLeft + prevLetterRect.width,
-            top: prevLetterRect.top - prevLetter.parentElement.offsetTop
+            top: prevLetter.offsetTop * -1
         }
     }
 
     const rect = letter?.el?.getBoundingClientRect()
     if (!rect) return zero()
-    console.log('offsetleft',letter.el.offsetLeft )
+    console.log('letter.el.offsetTop  ',letter.el.offsetTop, letter )
 
     return {
         left: letter.el.offsetLeft - letter.el.parentElement.parentElement.offsetLeft,
-        top: letter.el.offsetTop - letter.el.parentElement.offsetTop
+        top: letter.el.offsetTop * -1
     }
 })
 
 // Caret styles (position and animation)
 const caretStyles = computed(() => {
     const positionMap = {
-        left: letterPosition.value.left + 'px',
-        top: 0 + 'px',
+        left: letterPosition.value.left - 2 + 'px',
+        top: -letterPosition.value.top + 5 + 'px',
     }
 
     let animationName = isTyping.value ? 'none' : 'caretFlash'
