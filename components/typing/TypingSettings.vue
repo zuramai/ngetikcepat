@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import TextButton from "../ui/TextButton.vue";
 import { useTypingStore } from "~/store/typing"
-const typing = useTypingStore()
+const { config, configModes } = useTypingStore()
 
 </script>
 <template>
@@ -9,57 +10,19 @@ const typing = useTypingStore()
             <div class="modes">
                 <ul class="settings-list p-0 m-0 flex">
                     <li>
-                        <a href="#" class="text-button">
-                            <div class="i-mdi:at"></div>
-                            <span>punctuation</span>
-                        </a>
+                        <text-button icon="mdi:at" :active="config.punctuation">punctuation</text-button>
                     </li>
                     <li>
-                        <a href="#" class="text-button">
-                            <div class="i-mdi:numeric"></div>
-                            <span>numbers</span>
-                        </a>
+                        <text-button icon="mdi:numeric" :active="config.numbers">numbers</text-button>
                     </li>
                     <li class="separator"></li>
-                    <li>
-                        <a href="#" class="text-button">
-                            <div class="i-mdi:clock"></div>
-                            <span>time</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-button">
-                            <div class="i-mdi:format-text-variant"></div>
-                            <span>words</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-button">
-                            <div class="i-mdi:format-quote-open"></div>
-                            <span>quote</span>
-                        </a>
+                    <li v-for="(v, mode) in configModes">
+                        <text-button :icon="v.icon" :active="config.mode == mode">{{mode}}</text-button>
                     </li>
                     <li class="separator"></li>
-                    <template v-if="typing.mode == 'time'">
-                        <li>
-                            <a href="#" class="text-button">
-                                <span>15</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-button">
-                                <span>30</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-button">
-                                <span>45</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-button">
-                                <span>60</span>
-                            </a>
+                    <template v-if="config.mode == 'time'">
+                        <li v-for="modeOption in configModes[config.mode].options">
+                            <text-button :icon="false" :active="config[config.mode] == modeOption">{{ modeOption }}</text-button>
                         </li>
                     </template>
                 </ul>
