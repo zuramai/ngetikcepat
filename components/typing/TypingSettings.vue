@@ -32,12 +32,6 @@ const { config, configModes } = useTypingStore()
 .settings-card {
     background-color: var(--sub-alt-color);
 }
-.text-button {
-    display: flex;
-    align-items: center;
-    gap: .3rem;
-    padding: .7rem;
-}
 .settings-list {
     list-style: none;
 }

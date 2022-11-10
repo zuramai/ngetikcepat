@@ -13,6 +13,12 @@ const props = defineProps({
   </a>
 </template>
 <style>
+.text-button {
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .7rem;
+}
 .text-button.active {
   color: var(--main-color)
 }

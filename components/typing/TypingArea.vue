@@ -147,7 +147,7 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
 }
 </script>
 <template>
-    <div class="typing-area w-full md:w-2/3 mx-auto my-10 select-none p-10  text-6xl " @keydown="keydown" tabindex="0">
+    <div class="typing-area w-full md:w-2/3 mx-auto my-3 select-none p-10  text-6xl " @keydown="keydown" tabindex="0">
         <div class="words-wrapper overflow-hidden  relative h-[230px]" ref="wordsWrapper">
             <div class="words flex flex-wrap  absolute text-5xl" ref="wordsGroup" :style="wordsGroupStyle">
                 <div class="caret" :style="caretStyles"></div>
