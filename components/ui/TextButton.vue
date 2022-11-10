@@ -6,9 +6,14 @@ const props = defineProps({
 </script>
 <template>
   <a href="#" :class="['text-button', active === true ? 'active' : '']">
-    <div :class="[`i-${icon}`]" v-if="icon"></div>
+    <div :class="[`i-${icon}`]" v-show="icon"></div>
     <span>
       <slot></slot>
     </span>
   </a>
 </template>
+<style>
+.text-button.active {
+  color: var(--main-color)
+}
+</style>

@@ -4,6 +4,11 @@ import "~/assets/themes/dark-red.css"
 import "~/assets/css/main.css"
 import UiHeader from "./components/layouts/UiHeader.vue";
 import UiFooter from "./components/layouts/UiFooter.vue";
+
+useHead({
+  title: "Speedtyper"
+})
+
 </script>
 <template>
   <div class="font-sans flex w-full flex-col min-h-screen">

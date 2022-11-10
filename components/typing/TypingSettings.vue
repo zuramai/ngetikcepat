@@ -10,21 +10,19 @@ const { config, configModes } = useTypingStore()
             <div class="modes">
                 <ul class="settings-list p-0 m-0 flex">
                     <li>
-                        <text-button icon="mdi:at" :active="config.punctuation">punctuation</text-button>
+                        <text-button icon="mdi:at" :active="config.punctuation" @click="config.punctuation = !config.punctuation">punctuation</text-button>
                     </li>
                     <li>
-                        <text-button icon="mdi:numeric" :active="config.numbers">numbers</text-button>
+                        <text-button icon="mdi:numeric" :active="config.numbers" @click="config.numbers = !config.numbers">numbers</text-button>
                     </li>
                     <li class="separator"></li>
                     <li v-for="(v, mode) in configModes">
-                        <text-button :icon="v.icon" :active="config.mode == mode">{{mode}}</text-button>
+                        <text-button @click="config.mode = mode" :icon="v.icon" :active="config.mode == mode">{{mode}}</text-button>
                     </li>
                     <li class="separator"></li>
-                    <template v-if="config.mode == 'time'">
-                        <li v-for="modeOption in configModes[config.mode].options">
-                            <text-button :icon="false" :active="config[config.mode] == modeOption">{{ modeOption }}</text-button>
-                        </li>
-                    </template>
+                    <li v-for="modeOption in configModes[config.mode].options">
+                        <text-button :icon="false" :active="config[config.mode] == modeOption" @click="(config[config.mode] as any) = modeOption">{{ modeOption }}</text-button>
+                    </li>
                 </ul>
             </div>
         </div>
