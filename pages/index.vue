@@ -12,7 +12,7 @@ const words = reactive<Word[]>([])
 
 
 onMounted(() => {
-    fetch("/languages/quotes/quote-english.json", { cache: 'force-cache' })
+    fetch("/quotes/english.json", { cache: 'force-cache' })
         .then(res => res.json())
         .then(res => {
             quotes.value = res
@@ -39,6 +39,7 @@ onMounted(() => {
 <template>
     <div>
         <TypingSettings></TypingSettings>
+        <TypingOptions></TypingOptions>
         <TypingArea :words="words"></TypingArea>
     </div>
 </template>
