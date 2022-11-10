@@ -37,6 +37,8 @@ onMounted(() => {
 })
 </script>
 <template>
-    <TypingSettings></TypingSettings>
-    <TypingArea :words="words"></TypingArea>
+    <div>
+        <TypingSettings></TypingSettings>
+        <TypingArea :words="words"></TypingArea>
+    </div>
 </template>
