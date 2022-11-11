@@ -28,10 +28,16 @@ export const useTypingStore = defineStore('typing', () => {
             options: [15, 30, 45, 60]
         },
     }
+
+    const options = reactive({
+        theme: "bento",
+        language: "english"
+    })
     
     return {
         isTyping,
         config,
         configModes,
+        options
     }
 })

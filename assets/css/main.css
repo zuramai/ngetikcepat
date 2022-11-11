@@ -1,6 +1,8 @@
 @import "./_variables.css";
 @import "./animation.css";
-
+* {
+    transition: background-color .2s, color .2s;
+}
 body {
     background-color: var(--bg-color);
     color: var(--sub-color)

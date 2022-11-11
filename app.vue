@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import "normalize.css"
-import "~/assets/themes/dark-red.css"
 import "~/assets/css/main.css"
 import UiHeader from "./components/layouts/UiHeader.vue";
 import UiFooter from "./components/layouts/UiFooter.vue";

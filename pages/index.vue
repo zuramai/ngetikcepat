@@ -3,10 +3,18 @@ import type { Quotes, Quote } from '~/models/languages/quote';
 import { randomItem } from '~/utils/array'
 import type { Word } from '~/types/typing';
 
+const theme = useTheme()
+
+const themeUrl = computed(() => `/themes/${theme.currentTheme.value}.css`) 
+
+useHead({
+    link: [
+        { rel:"stylesheet", type: "text/css", href: themeUrl}
+    ]
+})
 
 const quotes = ref<Quotes>()
 const chosenQuote = ref<Quote>()
-
 
 const words = reactive<Word[]>([])
 

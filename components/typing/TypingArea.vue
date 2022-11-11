@@ -7,6 +7,7 @@ const { words } = defineProps<{
     words: Word[]
 }>()
 
+
 const wordsGroup = ref<HTMLElement>()
 const wordsWrapper = ref<HTMLElement>()
 
