@@ -54,7 +54,6 @@ const letterPosition = computed(() => {
 
     const rect = letter?.el?.getBoundingClientRect()
     if (!rect) return zero()
-    console.log('letter.el.offsetTop  ',letter.el.offsetTop, letter )
 
     return {
         left: letter.el.offsetLeft - letter.el.parentElement.parentElement.offsetLeft,
@@ -78,7 +77,6 @@ const caretStyles = computed(() => {
 })
 
 const wordsGroupStyle = computed(() => {
-    console.log(letterPosition.value)
     return {
         top: (letterPosition.value.top ) + 'px'
     }
@@ -132,6 +130,7 @@ const keydown = (e: KeyboardEvent) => {
 
 const getLetterStyle = (wordIndex, letterWordIndex) => {
     const word = words[wordIndex]
+    if(!word) return
 
     const typedLetters = typingData.currentlyTyping.split(' ')
     let color = "var(--sub-color)"

@@ -11,15 +11,19 @@ useHead({
 
 const { fetchWords, words } = useTyping()
 
+const isWordFetched = ref(false)
 
-onMounted(() => {
+onBeforeMount(() => {
     fetchWords()
+        .then(() => {
+            isWordFetched.value = true
+        })
 })
 </script>
 <template>
     <div>
         <TypingSettings></TypingSettings>
         <TypingOptions></TypingOptions>
-        <TypingArea :words="words"></TypingArea>
+        <TypingArea :words="words" v-if="isWordFetched"></TypingArea>
     </div>
 </template>
