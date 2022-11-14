@@ -2,7 +2,7 @@
 import TextButton from "~/components/ui/TextButton.vue"
 import { useTheme } from "~/composables/useTheme"
 
-const { changeTheme, currentTheme } = useTheme()
+const { nextTheme, changeTheme, currentTheme } = useTheme()
 </script>
 <template>
     <div class="options-area-wrapper flex justify-center mt-5">
@@ -18,7 +18,7 @@ const { changeTheme, currentTheme } = useTheme()
                     <text-button icon="mdi:earth" class="text-lg" title="language">english</text-button>
                 </li>
                 <li>
-                    <text-button icon="mdi:palette" class="text-lg" title="theme" @click="changeTheme('dollar')">{{ currentTheme }}</text-button>
+                    <text-button icon="mdi:palette" class="text-lg" title="theme" @click="nextTheme">{{ currentTheme }}</text-button>
                 </li>
             </ul>
         </div>
