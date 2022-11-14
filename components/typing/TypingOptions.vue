@@ -6,8 +6,26 @@ import { useTypingStore } from "~~/store/typing";
 const { nextTheme, changeTheme, currentTheme } = useTheme()
 const typingStore = useTypingStore()
 
-const language = computed(() => typingStore.options.language)
+const currentLanguage = computed(() => typingStore.options.language)
+
+const languageList = ref([])
+
+fetch("/languages/_list.json")
+    .then(res => res.json())
+    .then(res => {
+        languageList.value = res  
+    })
+
+
+const changelanguage = (language: string) => {
+    console.log('language changed to ', language)
+    typingStore.options.language = language
+}
+
 const nextLanguage = () => {
+    const index = languageList.value.findIndex(language => language.name == currentLanguage.value)
+    const nextIndex = index+1 >= languageList.value.length ? 0 : index + 1
+    changelanguage(languageList.value[nextIndex].name)
 }
 </script>
 <template>
@@ -21,7 +39,7 @@ const nextLanguage = () => {
                     </a>
                 </li>
                 <li>
-                    <text-button icon="mdi:earth" class="text-lg" title="language" @click="nextLanguage">english</text-button>
+                    <text-button icon="mdi:earth" class="text-lg" title="language" @click="nextLanguage">{{ currentLanguage }}</text-button>
                 </li>
                 <li>
                     <text-button icon="mdi:palette" class="text-lg" title="theme" @click="nextTheme">{{ currentTheme }}</text-button>

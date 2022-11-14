@@ -130,7 +130,7 @@ const keydown = (e: KeyboardEvent) => {
 
 const getLetterStyle = (wordIndex, letterWordIndex) => {
     const word = words[wordIndex]
-    if(!word) return
+    if(wordIndex > typingData.currentWord) return
 
     const typedLetters = typingData.currentlyTyping.split(' ')
     let color = "var(--sub-color)"
