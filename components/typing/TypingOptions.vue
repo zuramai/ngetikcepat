@@ -1,8 +1,14 @@
 <script lang="ts" setup>
 import TextButton from "~/components/ui/TextButton.vue"
 import { useTheme } from "~/composables/useTheme"
+import { useTypingStore } from "~~/store/typing";
 
 const { nextTheme, changeTheme, currentTheme } = useTheme()
+const typingStore = useTypingStore()
+
+const language = computed(() => typingStore.options.language)
+const nextLanguage = () => {
+}
 </script>
 <template>
     <div class="options-area-wrapper flex justify-center mt-5">
@@ -15,7 +21,7 @@ const { nextTheme, changeTheme, currentTheme } = useTheme()
                     </a>
                 </li>
                 <li>
-                    <text-button icon="mdi:earth" class="text-lg" title="language">english</text-button>
+                    <text-button icon="mdi:earth" class="text-lg" title="language" @click="nextLanguage">english</text-button>
                 </li>
                 <li>
                     <text-button icon="mdi:palette" class="text-lg" title="theme" @click="nextTheme">{{ currentTheme }}</text-button>

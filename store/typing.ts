@@ -33,6 +33,7 @@ export const useTypingStore = defineStore('typing', () => {
         theme: "bento",
         language: "english"
     })
+
     
     return {
         isTyping,
