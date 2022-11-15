@@ -21,7 +21,7 @@ useHead({
   <div class="font-sans flex w-full flex-col min-h-screen">
     <UiHeader></UiHeader>
     <NuxtLayout class="flex-grow">
-      <NuxtPage></NuxtPage>
+        <NuxtPage></NuxtPage>
     </NuxtLayout>
     <UiFooter></UiFooter>
   </div>

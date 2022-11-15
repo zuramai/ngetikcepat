@@ -30,6 +30,8 @@ onBeforeMount(() => {
     <div>
         <TypingSettings></TypingSettings>
         <TypingOptions></TypingOptions>
-        <TypingArea :words="words" v-if="isWordFetched"></TypingArea>
+        <Transition name="fade">
+            <TypingArea :words="words" v-if="isWordFetched"></TypingArea>
+        </Transition>
     </div>
 </template>
