@@ -28,6 +28,7 @@ const isTypingLastLetter = computed(() => {
 
 const isMounted = ref(false)
 
+
 // For caret animation
 const typingStore = useConfigStore()
 const { isTyping } = storeToRefs(typingStore)
@@ -83,8 +84,7 @@ const wordsGroupStyle = computed(() => {
 })
 
 const keydown = (e: KeyboardEvent) => {
-
-    if ([' ', "'"].includes(e.key)) {
+    if ([' ', "'", 'Tab'].includes(e.key)) {
         e.preventDefault() 
     }
 
@@ -109,7 +109,9 @@ const keydown = (e: KeyboardEvent) => {
         return
     }
 
-    if(['Shift', 'Control'].includes(e.key)) return
+    const prohibitedKeys = ['Shift', 'Control', 'Tab']
+
+    if(prohibitedKeys.includes(e.key)) return
 
     if(isTypingLastLetter.value && e.key !== ' ') {
         return
@@ -145,9 +147,22 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
         color
     }
 }
+
+onMounted(() => {
+    isMounted.value = true
+
+    const app = document.getElementById('app')
+    app.addEventListener('keydown', keydown)
+
+    onBeforeUnmount(() => {
+        app.removeEventListener('keydown', keydown)
+    })
+})
+
+
 </script>
 <template>
-    <div class="typing-area w-full md:w-2/3 mx-auto my-3 select-none p-10  text-6xl " @keydown="keydown" tabindex="0">
+    <div class="typing-area w-full md:w-2/3 mx-auto my-3 select-none p-10  text-6xl " tabindex="0">
         <div class="words-wrapper overflow-hidden  relative h-[230px]" ref="wordsWrapper">
             <div class="words flex flex-wrap  absolute text-5xl" ref="wordsGroup" :style="wordsGroupStyle">
                 <div class="caret" :style="caretStyles"></div>

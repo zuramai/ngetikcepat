@@ -16,9 +16,10 @@ useHead({
     ]
 })
 
+
 </script>
 <template>
-  <div class="font-sans flex w-full flex-col min-h-screen">
+  <div id="app" class="font-sans flex w-full flex-col min-h-screen" @keyup="keyup">
     <UiHeader></UiHeader>
     <NuxtLayout class="flex-grow">
         <NuxtPage></NuxtPage>
