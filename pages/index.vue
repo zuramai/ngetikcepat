@@ -28,15 +28,17 @@ onBeforeMount(() => {
 })
 </script>
 <template>
-    <div v-if="isEnded">
-        <TypingResult></TypingResult>
-    </div>
-
-    <div v-else>
-        <TypingSettings></TypingSettings>
-        <TypingOptions></TypingOptions>
-        <Transition name="fade">
-            <TypingArea :words="words" v-if="isWordFetched "></TypingArea>
-        </Transition>
+    <div>
+        <div v-if="isEnded">
+            <TypingResult></TypingResult>
+        </div>
+    
+        <div v-else>
+            <TypingSettings></TypingSettings>
+            <TypingOptions></TypingOptions>
+            <Transition name="fade">
+                <TypingArea :words="words" v-if="isWordFetched "></TypingArea>
+            </Transition>
+        </div>
     </div>
 </template>
