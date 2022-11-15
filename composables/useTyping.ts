@@ -28,11 +28,13 @@ export const useTyping = () => {
 
     const fetchWords = () => {
         return new Promise<void>((resolve, reject) => {
+            console.log('current words', words.value)
             const folder = mode.value == "quote" ? 'quotes' : 'languages'
             fetch(`/${folder}/${language.value}.json`, { cache: 'force-cache' })
                 .then(res => res.json())
                 .then(res => {
                     if(mode.value == 'quote') {
+                        words.value = []
                         quotes.value = res
                         // Choose one random quote
                         chosenQuote.value = randomItem(quotes.value.quotes)
@@ -40,6 +42,7 @@ export const useTyping = () => {
                         words.value.push(...chosenQuote.value.text.split(' ').map(word => {
                             return transformWord(word)
                         }))
+                        console.log("quote chosen", words.value)
                         return resolve()
                     } 
     

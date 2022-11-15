@@ -15,7 +15,10 @@ const typingStore = useTypingStore()
 
 const isWordFetched = ref(false)
 
-watch(() => typingStore.options.language, () => {
+watch([
+    () => typingStore.options.language,
+    typingStore.config,
+], () => {
     isWordFetched.value = false
 
     fetchWords()
