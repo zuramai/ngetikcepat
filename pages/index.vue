@@ -1,14 +1,6 @@
 <script lang="ts" setup>
 import { useTypingStore } from '~/store/typing'
-const theme = useTheme()
 
-const themeUrl = computed(() => `/themes/${theme.currentTheme.value}.css`) 
-
-useHead({
-    link: [
-        { rel:"stylesheet", type: "text/css", href: themeUrl}
-    ]
-})
 
 const { fetchWords, words } = useTyping()
 const typingStore = useTypingStore()

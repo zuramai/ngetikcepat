@@ -4,8 +4,16 @@ import "~/assets/css/main.css"
 import UiHeader from "./components/layouts/UiHeader.vue";
 import UiFooter from "./components/layouts/UiFooter.vue";
 
+const theme = useTheme()
+
+const themeUrl = computed(() => `/themes/${theme.currentTheme.value}.css`) 
+
 useHead({
-  title: "Speedtyper"
+  title: "Speedtyper",
+
+  link: [
+        { rel:"stylesheet", type: "text/css", href: themeUrl}
+    ]
 })
 
 </script>

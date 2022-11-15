@@ -51,7 +51,6 @@ export const useTyping = () => {
     
                     if(mode.value == 'time') {
                         words.value = allWords.value.sort(() => .5 - Math.random())
-                        console.log(words.value)
                         return resolve()
                     }
                     
