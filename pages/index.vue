@@ -1,11 +1,12 @@
 <script lang="ts" setup>
-import { useTypingStore } from '~/store/typing'
+import { useConfigStore } from '~~/store/config'
 
 
 const { fetchWords, words } = useTyping()
-const typingStore = useTypingStore()
+const typingStore = useConfigStore()
 
 const isWordFetched = ref(false)
+const isEnded = ref(true)
 
 watch([
     () => typingStore.options.language,
@@ -27,11 +28,15 @@ onBeforeMount(() => {
 })
 </script>
 <template>
-    <div>
+    <div v-if="isEnded">
+        <TypingResult></TypingResult>
+    </div>
+
+    <div v-else>
         <TypingSettings></TypingSettings>
         <TypingOptions></TypingOptions>
         <Transition name="fade">
-            <TypingArea :words="words" v-if="isWordFetched"></TypingArea>
+            <TypingArea :words="words" v-if="isWordFetched "></TypingArea>
         </Transition>
     </div>
 </template>

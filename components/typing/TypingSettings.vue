@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import TextButton from "../ui/TextButton.vue";
-import { useTypingStore } from "~/store/typing"
-const { config, configModes } = useTypingStore()
+import { useConfigStore } from "~~/store/config"
+const { config, configModes } = useConfigStore()
 
 </script>
 <template>

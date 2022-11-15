@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { Config } from '~/types/config'
 
-export const useTypingStore = defineStore('typing', () => {
+export const useConfigStore = defineStore('typing', () => {
     const isTyping = ref(false)
 
     // Default typing config

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import TextButton from "~/components/ui/TextButton.vue"
 import { useTheme } from "~/composables/useTheme"
-import { useTypingStore } from "~~/store/typing";
+import { useConfigStore } from "~~/store/config";
 
 const { nextTheme, changeTheme, currentTheme } = useTheme()
-const typingStore = useTypingStore()
+const typingStore = useConfigStore()
 
 const currentLanguage = computed(() => typingStore.options.language)
 

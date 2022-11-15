@@ -1,4 +1,4 @@
-import { useTypingStore } from "~/store/typing"
+import { useConfigStore } from "~~/store/config"
 import type { Quotes, Quote } from '~/models/languages/quote';
 import type { Word } from '~/types/typing';
 import { randomItem } from '~/utils/array'
@@ -6,7 +6,7 @@ import { randomItem } from '~/utils/array'
 export const useTyping = () => {
     const allWords = ref<Word[]>([])
     const words = ref<Word[]>([])
-    const typingStore = useTypingStore()
+    const typingStore = useConfigStore()
     const language = computed(() => typingStore.options.language)
     const mode = computed(() => typingStore.config.mode)
 

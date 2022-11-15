@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Word } from '~/types/typing';
-import { useTypingStore } from '~/store/typing'
+import { useConfigStore } from '~~/store/config'
 import { storeToRefs } from 'pinia'
 
 const { words } = defineProps<{
@@ -29,7 +29,7 @@ const isTypingLastLetter = computed(() => {
 const isMounted = ref(false)
 
 // For caret animation
-const typingStore = useTypingStore()
+const typingStore = useConfigStore()
 const { isTyping } = storeToRefs(typingStore)
 let timerBeforeStopTyping: NodeJS.Timeout
 

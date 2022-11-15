@@ -1,11 +1,11 @@
-import { useTypingStore } from "~/store/typing"
+import { useConfigStore } from "~~/store/config"
 
 type Theme = {
     name: string
 }
 
 export const useTheme = () => {
-    const typingStore = useTypingStore()
+    const typingStore = useConfigStore()
 
     const currentTheme = computed(() => typingStore.options.theme)
     const themeList = ref<Theme[]>([])
