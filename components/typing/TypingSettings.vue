@@ -2,7 +2,9 @@
 import TextButton from "../ui/TextButton.vue";
 import { useConfigStore } from "~~/store/config"
 const { config, configModes } = useConfigStore()
-
+const availableIcons = [
+  'i-mdi:at', 'i-mdi:numeric', 'i-mdi:clock', 'i-mdi:format-text-variant', 'i-mdi:format-quote-open'
+]
 </script>
 <template>
     <div class="typing-settings flex">
@@ -10,10 +12,10 @@ const { config, configModes } = useConfigStore()
             <div class="modes">
                 <ul class="settings-list p-0 m-0 flex">
                     <li>
-                        <text-button icon="mdi:at" :active="config.punctuation" @click="config.punctuation = !config.punctuation">punctuation</text-button>
+                        <text-button icon="i-mdi:at" :active="config.punctuation" @click="config.punctuation = !config.punctuation">punctuation</text-button>
                     </li>
                     <li>
-                        <text-button icon="mdi:numeric" :active="config.numbers" @click="config.numbers = !config.numbers">numbers</text-button>
+                        <text-button icon="i-mdi:numeric" :active="config.numbers" @click="config.numbers = !config.numbers">numbers</text-button>
                     </li>
                     <li class="separator"></li>
                     <li v-for="(v, mode) in configModes">

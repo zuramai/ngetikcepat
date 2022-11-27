@@ -3,11 +3,13 @@ const props = defineProps({
   active: Boolean,
   icon: [String, Boolean]
 })
+
+
 defineEmits(['click'])
 </script>
 <template>
   <a href="#" :class="['text-button', active === true ? 'active' : '']" @click="$emit('click')">
-    <div :class="[`i-${icon}`]" v-show="icon"></div>
+    <div :class="icon" v-show="icon"></div>
     <span>
       <slot></slot>
     </span>

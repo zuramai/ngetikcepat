@@ -16,11 +16,11 @@ export const useConfigStore = defineStore('typing', () => {
 
     const configModes = {
         words: {
-            icon: "mdi:clock",
+            icon: "i-mdi:clock",
             options: [10, 30, 60, 120]
         },
         quote: {
-            icon: "mdi:format-text-variant",
+            icon: "i-mdi:format-text-variant",
             options: ["all", "short", "medium", "long"]
         },
         time: {
