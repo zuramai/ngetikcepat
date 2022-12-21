@@ -29,8 +29,9 @@ export const useConfigStore = defineStore('typing', () => {
         },
     }
 
+    // Default options
     const options = reactive({
-        theme: "bento",
+        theme: "comfy",
         language: "english"
     })
 
