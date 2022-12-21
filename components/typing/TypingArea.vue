@@ -2,6 +2,7 @@
 import type { Word } from '~/types/typing';
 import { useConfigStore } from '~~/store/config'
 import { storeToRefs } from 'pinia'
+import { Ref } from 'vue';
 
 const { words } = defineProps<{
     words: Word[]
@@ -148,14 +149,14 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
     }
 }
 
+// const app = inject<Ref<HTMLElement>>('app')
 onMounted(() => {
     isMounted.value = true
-
-    const app = document.getElementById('app')
-    app.addEventListener('keydown', keydown)
+    
+    document.body.addEventListener('keydown', keydown)
 
     onBeforeUnmount(() => {
-        app.removeEventListener('keydown', keydown)
+        document.body.removeEventListener('keydown', keydown)
     })
 })
 
