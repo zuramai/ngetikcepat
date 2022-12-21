@@ -8,7 +8,6 @@ const { words } = defineProps<{
     words: Word[]
 }>()
 
-
 const wordsGroup = ref<HTMLElement>()
 const wordsWrapper = ref<HTMLElement>()
 
@@ -85,8 +84,12 @@ const wordsGroupStyle = computed(() => {
 })
 
 const keydown = (e: KeyboardEvent) => {
-    if ([' ', "'", 'Tab'].includes(e.key)) {
+    if ([' ', "'", 'Tab','Alt'].includes(e.key)) {
         e.preventDefault() 
+
+        if(['Alt'].includes(e.key)) {
+            return
+        }
     }
 
     if (e.key == ' ') {
