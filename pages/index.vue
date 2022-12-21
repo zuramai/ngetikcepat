@@ -2,7 +2,7 @@
 import { useConfigStore } from '~~/store/config'
 
 
-const { fetchWords, words } = useTyping()
+const { fetchWords, words } = useTypingData()
 const typingStore = useConfigStore()
 
 const isWordFetched = ref(false)

@@ -3,7 +3,7 @@ import type { Quotes, Quote } from '~/models/languages/quote';
 import type { Word } from '~/types/typing';
 import { randomItem } from '~/utils/array'
 
-export const useTyping = () => {
+export const useTypingData = () => {
     const allWords = ref<Word[]>([])
     const words = ref<Word[]>([])
     const typingStore = useConfigStore()
