@@ -4,25 +4,16 @@ import { Ref } from 'vue'
 import type { Word } from '~/types/typing'
 import { useConfigStore } from '~~/store/config'
 
-const { words } = defineProps<{
+const props = defineProps<{
   words: Word[]
 }>()
+const words = computed(() => props.words)
 
 const wordsGroup = ref<HTMLElement>()
 const wordsWrapper = ref<HTMLElement>()
-
-const { typing: typingData } = useTyping()
-
-const currentWord = computed(() => words[typingData.currentWord].text)
-
-const isTypingLastLetter = computed(() => {
-  if (typingData.currentLetter >= currentWord.value.length)
-    return true
-
-  return false
-})
-
 const isMounted = ref(false)
+
+const { typing: typingData, currentWord, isTypingLastLetter } = useTyping(words)
 
 // For caret animation
 const typingStore = useConfigStore()
@@ -33,17 +24,17 @@ let timerBeforeStopTyping: NodeJS.Timeout
 const letterPosition = computed(() => {
   const zero = () => ({ left: 0, top: 0, right: 0, bottom: 0 })
 
-  if (!isMounted || !words[typingData.currentWord])
+  if (!isMounted || !words.value[typingData.currentWordIndex])
     return zero()
 
-  const letter = words[typingData.currentWord]?.letters[typingData.currentLetter]
+  const letter = words.value[typingData.currentWordIndex]?.letters[typingData.currentLetter]
 
   if (isTypingLastLetter.value) {
-    const prevLetter = words[typingData.currentWord]?.letters[typingData.currentLetter - 1].el
+    const prevLetter = words.value[typingData.currentWordIndex]!.letters[typingData.currentLetter - 1].el!
     const prevLetterRect = { left: prevLetter.offsetLeft, top: prevLetter.offsetTop, width: prevLetter.offsetWidth }
 
     return {
-      left: prevLetterRect.left + prevLetter.parentElement.parentElement.offsetLeft + prevLetterRect.width,
+      left: prevLetterRect.left + wordsGroup.value!.offsetLeft + prevLetterRect.width,
       top: prevLetter.offsetTop * -1,
     }
   }
@@ -53,8 +44,8 @@ const letterPosition = computed(() => {
     return zero()
 
   return {
-    left: letter.el.offsetLeft - letter.el.parentElement.parentElement.offsetLeft,
-    top: letter.el.offsetTop * -1,
+    left: letter.el!.offsetLeft - (wordsGroup.value?.offsetLeft ?? 0),
+    top: letter.el!.offsetTop * -1,
   }
 })
 
@@ -87,19 +78,22 @@ const keydown = (e: KeyboardEvent) => {
       return
   }
 
-  if (e.key == ' ') {
+  if (e.ctrlKey)
+    return
+
+  if (e.key === ' ') {
     // move to the next word
     typingData.currentLetter = 0
-    typingData.currentWord++
+    typingData.currentWordIndex++
     typingData.currentlyTyping += e.key
     return
   }
 
-  if (e.key == 'Backspace') {
+  if (e.key === 'Backspace') {
     const str = typingData.currentlyTyping
-    if (typingData.currentLetter == 0) {
+    if (typingData.currentLetter === 0) {
       // Back to prev word
-      typingData.currentWord--
+      typingData.currentWordIndex--
       typingData.currentLetter = currentWord.value.length
     }
     else {
@@ -129,9 +123,9 @@ const keydown = (e: KeyboardEvent) => {
   }
 }
 
-const getLetterStyle = (wordIndex, letterWordIndex) => {
-  const word = words[wordIndex]
-  if (wordIndex > typingData.currentWord)
+const getLetterStyle = (wordIndex: number, letterWordIndex: number) => {
+  const word = words.value[wordIndex]
+  if (wordIndex > typingData.currentWordIndex)
     return
 
   const typedLetters = typingData.currentlyTyping.split(' ')
@@ -139,7 +133,7 @@ const getLetterStyle = (wordIndex, letterWordIndex) => {
   let isCorrect = false
 
   if (typedLetters[wordIndex] && typedLetters[wordIndex][letterWordIndex]) {
-    isCorrect = typedLetters[wordIndex][letterWordIndex] == word.text[letterWordIndex]
+    isCorrect = typedLetters[wordIndex][letterWordIndex] === word.text[letterWordIndex]
     color = isCorrect ? 'var(--main-color)' : 'var(--error-color)'
   }
 
@@ -165,10 +159,11 @@ onMounted(() => {
     <div ref="wordsWrapper" class="words-wrapper overflow-hidden  relative h-[230px]">
       <div ref="wordsGroup" class="words flex flex-wrap  absolute text-5xl" :style="wordsGroupStyle">
         <div class="caret" :style="caretStyles" />
-        <div v-for="(word, wordIndex) in words" :ref="(el) => words[wordIndex].el = (el as HTMLElement)" class="word ">
+        <div v-for="(word, wordIndex) in words" :key="wordIndex" :ref="(el) => words[wordIndex].el = (el as HTMLElement)" class="word ">
           <letter
             v-for="(letter, letterIndex) in word.letters"
-            :ref="(el) => words[wordIndex].letters[letterIndex].el = el"
+            :key="letterIndex"
+            :ref="(el: HTMLElement) => words[wordIndex].letters[letterIndex].el = el"
             :style="getLetterStyle(wordIndex, letterIndex)"
           >
             {{ letter.text }}

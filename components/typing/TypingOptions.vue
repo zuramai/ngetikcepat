@@ -2,13 +2,14 @@
 import TextButton from '~/components/ui/TextButton.vue'
 import { useTheme } from '~/composables/useTheme'
 import { useConfigStore } from '~~/store/config'
+import type { Languages } from '~/types/language'
 
 const { nextTheme, changeTheme, currentTheme } = useTheme()
 const typingStore = useConfigStore()
 
 const currentLanguage = computed(() => typingStore.options.language)
 
-const languageList = ref([])
+const languageList = ref<Languages>([])
 
 fetch('/languages/_list.json')
   .then(res => res.json())
@@ -22,7 +23,7 @@ const changelanguage = (language: string) => {
 }
 
 const nextLanguage = () => {
-  const index = languageList.value.findIndex(language => language.name == currentLanguage.value)
+  const index = languageList.value.findIndex(language => language.name === currentLanguage.value)
   const nextIndex = index + 1 >= languageList.value.length ? 0 : index + 1
   changelanguage(languageList.value[nextIndex].name)
 }
