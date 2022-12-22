@@ -10,9 +10,9 @@ export interface Config {
   numbers: boolean
 
   /**
-   * Choose typing mode 
+   * Choose typing mode
    */
-  mode: "time" | "words" | "quote"
+  mode: 'time' | 'words' | 'quote'
 
   /**
    * If user choose *time* mode, they can choose the duration in seconds
@@ -27,5 +27,5 @@ export interface Config {
   /**
    * If user choose *quote* mode, they can choose the size of the quote
    */
-  quote: "all" | "short" | "medium" | "long"
+  quote: 'all' | 'short' | 'medium' | 'long'
 }
