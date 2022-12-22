@@ -11,12 +11,8 @@ const { words } = defineProps<{
 const wordsGroup = ref<HTMLElement>()
 const wordsWrapper = ref<HTMLElement>()
 
-const typingData = reactive({
-  currentWord: 0, // word index
-  currentLetter: 0, // letter index from the word
-  typedWord: [],
-  currentlyTyping: '',
-})
+const { typing: typingData } = useTyping()
+
 const currentWord = computed(() => words[typingData.currentWord].text)
 
 const isTypingLastLetter = computed(() => {

@@ -3,7 +3,7 @@ import TextButton from '../ui/TextButton.vue'
 import { useConfigStore } from '~~/store/config'
 const { config, configModes } = useConfigStore()
 const availableIcons = [
-  'i-mdi:at', 'i-mdi:numeric', 'i-mdi:clock', 'i-mdi:format-text-variant', 'i-mdi:format-quote-open',
+  'i-mdi:at', 'i-mdi:numeric', 'i-mdi:clock', 'i-mdi:format-text-variant', 'i-mdi:format-quote-close',
 ]
 </script>
 
@@ -23,14 +23,14 @@ const availableIcons = [
             </TextButton>
           </li>
           <li class="separator" />
-          <li v-for="(v, mode) in configModes">
-            <TextButton :icon="v.icon" :active="config.mode == mode" @click="config.mode = mode">
+          <li v-for="(v, mode) in configModes" :key="mode">
+            <TextButton :icon="v.icon" :active="config.mode === mode" @click="config.mode = mode">
               {{ mode }}
             </TextButton>
           </li>
           <li class="separator" />
-          <li v-for="modeOption in configModes[config.mode].options">
-            <TextButton :icon="false" :active="config[config.mode] == modeOption" @click="(config[config.mode] as any) = modeOption">
+          <li v-for="modeOption in configModes[config.mode].options" :key="modeOption">
+            <TextButton :icon="false" :active="config[config.mode] === modeOption" @click="(config[config.mode] as any) = modeOption">
               {{ modeOption }}
             </TextButton>
           </li>

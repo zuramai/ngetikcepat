@@ -8,8 +8,11 @@ defineEmits(['click'])
 </script>
 
 <template>
-  <a href="#" class="text-button" :class="[active === true ? 'active' : '']" @click="$emit('click')">
-    <div v-show="icon" :class="icon" />
+  <a href="#" class="text-button inline-block" :class="[active === true ? 'active' : '']" @click="$emit('click')">
+    <slot name="icon">
+      <div v-show="icon || $slots.icon" :class="icon" />
+    </slot>
+
     <span>
       <slot />
     </span>

@@ -35,16 +35,22 @@ const nextLanguage = () => {
       <ul class="mx-auto m-0 list-none flex gap-1 pr-2 pl-0">
         <li class="flex items-center ">
           <a class="bg-gray-100/4 hover:bg-gray-100/10 rounded-full px-4 block h-full" href="#">
-            <div class="i-mdi:cog mt-4" />
+            <div class="i-mdi:cog mt-3" />
           </a>
         </li>
         <li>
-          <TextButton icon="mdi:earth" class="text-lg" title="language" @click="nextLanguage">
+          <TextButton title="language" @click="nextLanguage">
+            <template #icon>
+              <div class="i-mdi:earth" />
+            </template>
             {{ currentLanguage }}
           </TextButton>
         </li>
         <li>
-          <TextButton icon="mdi:palette" class="text-lg" title="theme" @click="nextTheme">
+          <TextButton title="theme" @click="nextTheme">
+            <template #icon>
+              <div class="i-mdi:palette" />
+            </template>
             {{ currentTheme }}
           </TextButton>
         </li>
