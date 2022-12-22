@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import TextButton from "~/components/ui/TextButton.vue"
-import { useTheme } from "~/composables/useTheme"
-import { useConfigStore } from "~~/store/config";
+import TextButton from '~/components/ui/TextButton.vue'
+import { useTheme } from '~/composables/useTheme'
+import { useConfigStore } from '~~/store/config'
 
 const { nextTheme, changeTheme, currentTheme } = useTheme()
 const typingStore = useConfigStore()
@@ -10,44 +10,49 @@ const currentLanguage = computed(() => typingStore.options.language)
 
 const languageList = ref([])
 
-fetch("/languages/_list.json")
-    .then(res => res.json())
-    .then(res => {
-        languageList.value = res  
-    })
-
+fetch('/languages/_list.json')
+  .then(res => res.json())
+  .then((res) => {
+    languageList.value = res
+  })
 
 const changelanguage = (language: string) => {
-    console.log('language changed to ', language)
-    typingStore.options.language = language
+  console.log('language changed to ', language)
+  typingStore.options.language = language
 }
 
 const nextLanguage = () => {
-    const index = languageList.value.findIndex(language => language.name == currentLanguage.value)
-    const nextIndex = index+1 >= languageList.value.length ? 0 : index + 1
-    changelanguage(languageList.value[nextIndex].name)
+  const index = languageList.value.findIndex(language => language.name == currentLanguage.value)
+  const nextIndex = index + 1 >= languageList.value.length ? 0 : index + 1
+  changelanguage(languageList.value[nextIndex].name)
 }
 </script>
+
 <template>
-    <div class="options-area-wrapper flex justify-center mt-5">
-        <div class="options-area">
-            <div class="options-bg  rounded-full"></div>
-            <ul class="mx-auto m-0 list-none flex gap-1 pr-2 pl-0">
-                <li class="flex items-center ">
-                    <a class="bg-gray-100/4 hover:bg-gray-100/10 rounded-full px-4 block h-full" href="#">
-                        <div class="i-mdi:cog mt-4"></div>
-                    </a>
-                </li>
-                <li>
-                    <text-button icon="mdi:earth" class="text-lg" title="language" @click="nextLanguage">{{ currentLanguage }}</text-button>
-                </li>
-                <li>
-                    <text-button icon="mdi:palette" class="text-lg" title="theme" @click="nextTheme">{{ currentTheme }}</text-button>
-                </li>
-            </ul>
-        </div>
+  <div class="options-area-wrapper flex justify-center mt-5">
+    <div class="options-area">
+      <div class="options-bg  rounded-full" />
+      <ul class="mx-auto m-0 list-none flex gap-1 pr-2 pl-0">
+        <li class="flex items-center ">
+          <a class="bg-gray-100/4 hover:bg-gray-100/10 rounded-full px-4 block h-full" href="#">
+            <div class="i-mdi:cog mt-4" />
+          </a>
+        </li>
+        <li>
+          <TextButton icon="mdi:earth" class="text-lg" title="language" @click="nextLanguage">
+            {{ currentLanguage }}
+          </TextButton>
+        </li>
+        <li>
+          <TextButton icon="mdi:palette" class="text-lg" title="theme" @click="nextTheme">
+            {{ currentTheme }}
+          </TextButton>
+        </li>
+      </ul>
     </div>
+  </div>
 </template>
+
 <style>
 .options-area {
     position: relative;
