@@ -3,37 +3,42 @@
   "homepage": "https://github.com/zuramai/speedtyper#readme",
   "description": "Test your typing skills and race with your friends!",
   "bugs": {
-    "url" : "https://github.com/zuramai/speedtyper/issues"
+    "url": "https://github.com/zuramai/speedtyper/issues"
   },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint ./**/*.{vue,ts}"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.34.0",
+    "@antfu/eslint-config-ts": "^0.34.0",
     "@iconify-json/mdi": "^1.1.34",
     "@pinia/nuxt": "^0.4.3",
     "@unocss/nuxt": "^0.46.2",
     "@unocss/preset-icons": "^0.46.2",
     "@unocss/preset-web-fonts": "^0.46.2",
-    "nuxt": "3.0.0-rc.12",
+    "eslint": "^8.30.0",
+    "nuxt": "3.0.0",
     "pinia": "^2.0.23",
     "postcss-nesting": "^10.2.0",
+    "typescript": "^4.9.4",
     "unplugin-icons": "^0.14.13"
   },
   "dependencies": {
     "normalize.css": "^8.0.1"
   },
-  "license" : "BSD-3-Clause",
+  "license": "BSD-3-Clause",
   "author": {
-    "name" : "Saugi",
-    "email" : "saugi.dev@gmail.com",
-    "url" : "https://github.com/zuramai/"
+    "name": "Saugi",
+    "email": "saugi.dev@gmail.com",
+    "url": "https://github.com/zuramai/"
   },
   "funding": {
-    "type" : "individual",
-    "url" : "https://github.com/sponsors/zuramai/"
+    "type": "individual",
+    "url": "https://github.com/sponsors/zuramai/"
   }
 }
