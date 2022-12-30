@@ -3,8 +3,8 @@ const now = new Date()
 </script>
 
 <template>
-  <footer>
-    <p class="text-center">
+  <footer class="mt-10 px-25">
+    <p class="">
       Copyright &copy; {{ now.getFullYear() }} Crafted by
       <a href="https://github.com/zuramai" target="_blank" class="underline">zuramai</a>
     </p>

@@ -9,7 +9,7 @@ const availableIcons = [
 
 <template>
   <div class="typing-settings flex">
-    <div class="settings-card flex-grow-0 rounded-lg mx-auto flex my-5 text-sm">
+    <div class="settings-card flex-grow-0 rounded-lg flex my-5 text-sm">
       <div class="modes">
         <ul class="settings-list p-0 m-0 flex">
           <li>

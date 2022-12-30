@@ -155,8 +155,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="typing-area w-full md:w-2/3 mx-auto my-3 select-none p-10  text-6xl " tabindex="0">
-    <div ref="wordsWrapper" class="words-wrapper overflow-hidden  relative h-[230px]">
+  <div class="typing-area w-full md:w-2/3 my-3 select-none py-10  text-6xl " tabindex="0">
+    <div ref="wordsWrapper" class="words-wrapper overflow-hidden  relative h-[225px]">
       <div ref="wordsGroup" class="words flex flex-wrap  absolute text-5xl" :style="wordsGroupStyle">
         <div class="caret" :style="caretStyles" />
         <div v-for="(word, wordIndex) in words" :key="wordIndex" :ref="(el) => words[wordIndex].el = (el as HTMLElement)" class="word ">

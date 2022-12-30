@@ -32,7 +32,7 @@ export const useConfigStore = defineStore('typing', () => {
   // Default options
   const options = reactive({
     theme: 'comfy',
-    language: 'english',
+    language: 'indonesian',
   })
 
   return {

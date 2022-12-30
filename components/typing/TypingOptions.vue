@@ -11,11 +11,12 @@ const currentLanguage = computed(() => typingStore.options.language)
 
 const languageList = ref<Languages>([])
 
-fetch('/languages/_list.json')
-  .then(res => res.json())
-  .then((res) => {
-    languageList.value = res
-  })
+onMounted(() => {
+  $fetch('/languages/_list.json')
+    .then((res) => {
+      languageList.value = res as Languages
+    })
+})
 
 const changelanguage = (language: string) => {
   console.log('language changed to ', language)
@@ -30,7 +31,7 @@ const nextLanguage = () => {
 </script>
 
 <template>
-  <div class="options-area-wrapper flex justify-center mt-5">
+  <div class="options-area-wrapper flex mt-5">
     <div class="options-area">
       <div class="options-bg  rounded-full" />
       <ul class="mx-auto m-0 list-none flex gap-1 pr-2 pl-0">

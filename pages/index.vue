@@ -27,7 +27,7 @@ onBeforeMount(() => {
 })
 
 const keyup = (e: KeyboardEvent) => {
-  if (e.key == 'Tab') {
+  if (e.key === 'Tab') {
     // Restart
     e.preventDefault()
     startFetch()

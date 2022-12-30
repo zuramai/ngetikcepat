@@ -16,16 +16,15 @@ export const useTheme = () => {
   }
 
   const nextTheme = () => {
-    const index = themeList.value.findIndex(theme => theme.name == currentTheme.value)
+    const index = themeList.value.findIndex(theme => theme.name === currentTheme.value)
     const nextIndex = index + 1 >= themeList.value.length ? 0 : index + 1
     changeTheme(themeList.value[nextIndex].name)
   }
 
   onMounted(() => {
-    fetch('/themes/_list.json')
-      .then(res => res.json())
+    $fetch('/themes/_list.json')
       .then((res) => {
-        themeList.value = res
+        themeList.value = res as Theme[]
       })
   })
 
