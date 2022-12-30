@@ -1,15 +1,42 @@
 <script lang="ts" setup>
 import TextButton from '../ui/TextButton.vue'
+import ListSlider from '../ui/ListSlider.vue'
 import { useConfigStore } from '~~/store/config'
+import type { Languages } from '~~/types/language'
+const typingStore = useConfigStore()
 const { config, configModes } = useConfigStore()
 const availableIcons = [
   'i-mdi:at', 'i-mdi:numeric', 'i-mdi:clock', 'i-mdi:format-text-variant', 'i-mdi:format-quote-close',
 ]
+
+const languageList = ref<Languages>([])
+const currentLanguage = computed(() => typingStore.options.language)
+
+onMounted(() => {
+  $fetch('/languages/_list.json')
+    .then((res) => {
+      languageList.value = res as Languages
+    })
+})
+
+const changelanguage = (language: string) => {
+  console.log('language changed to ', language)
+  typingStore.options.language = language
+}
+
+const nextLanguage = () => {
+  const index = languageList.value.findIndex(language => language.name === currentLanguage.value)
+  const nextIndex = index + 1 >= languageList.value.length ? 0 : index + 1
+  changelanguage(languageList.value[nextIndex].name)
+}
 </script>
 
 <template>
   <div class="typing-settings flex">
-    <div class="settings-card flex-grow-0 rounded-lg flex my-5 text-sm">
+    <div class="settings-card flex-grow-0 rounded-lg my-5 text-sm">
+      <h4 class="px-3 text-xl font-bold my-2">
+        Typing Options
+      </h4>
       <div class="modes">
         <ul class="settings-list p-0 m-0 flex">
           <li>
@@ -35,6 +62,12 @@ const availableIcons = [
             </TextButton>
           </li>
         </ul>
+      </div>
+      <div class="language text-normal px-3 flex items-center  mb-5">
+        <h4 class="mr-5 my-0">
+          Language:
+        </h4>
+        <ui-list-slider :labels="languageList.map(a => a.name)" />
       </div>
     </div>
   </div>

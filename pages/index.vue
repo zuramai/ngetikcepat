@@ -43,7 +43,7 @@ const keyup = (e: KeyboardEvent) => {
 
     <div v-else>
       <TypingSettings />
-      <TypingOptions />
+      <!-- <TypingOptions /> -->
       <Transition name="fade">
         <TypingArea v-if="isWordFetched" :words="words" />
       </Transition>
