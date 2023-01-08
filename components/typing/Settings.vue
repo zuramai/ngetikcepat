@@ -6,9 +6,10 @@ import type { Languages } from '~~/types/language'
 const typingStore = useConfigStore()
 const { config, configModes } = useConfigStore()
 const availableIcons = [
-  'i-mdi:at', 'i-mdi:numeric', 'i-mdi:clock', 'i-mdi:format-text-variant', 'i-mdi:format-quote-close',
+  'i-mdi:world', 'i-mdi:palette', 'i-mdi:clock', 'i-mdi:format-text-variant', 'i-mdi:format-quote-close',
 ]
 
+const { nextTheme, changeTheme, currentTheme } = useTheme()
 const languageList = ref<Languages>([])
 const currentLanguage = computed(() => typingStore.options.language)
 
@@ -32,21 +33,21 @@ const nextLanguage = () => {
 </script>
 
 <template>
-  <div class="typing-settings flex">
-    <div class="settings-card flex-grow-0 rounded-lg my-5 text-sm">
+  <div class="typing-settings flex justify-center">
+    <div class="settings-card flex-grow-0 rounded-lg my-5 text-sm p-1">
       <h4 class="px-3 text-xl font-bold my-2">
         Typing Options
       </h4>
       <div class="modes">
         <ul class="settings-list p-0 m-0 flex">
           <li>
-            <TextButton icon="i-mdi:at" :active="config.punctuation" @click="config.punctuation = !config.punctuation">
-              punctuation
+            <TextButton icon="i-mdi:world" :active="config.punctuation" @click="nextLanguage">
+              {{ currentLanguage }}
             </TextButton>
           </li>
           <li>
-            <TextButton icon="i-mdi:numeric" :active="config.numbers" @click="config.numbers = !config.numbers">
-              numbers
+            <TextButton icon="i-mdi:palette" :active="config.numbers" @click="nextTheme">
+              {{ currentTheme }}
             </TextButton>
           </li>
           <li class="separator" />
@@ -62,12 +63,6 @@ const nextLanguage = () => {
             </TextButton>
           </li>
         </ul>
-      </div>
-      <div class="language text-normal px-3 flex items-center  mb-5">
-        <h4 class="mr-5 my-0">
-          Language:
-        </h4>
-        <ui-list-slider :labels="languageList.map(a => a.name)" />
       </div>
     </div>
   </div>

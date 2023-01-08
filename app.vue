@@ -8,7 +8,7 @@ const app = ref()
 const themeUrl = computed(() => `/themes/${theme.currentTheme.value}.css`)
 
 useHead({
-  title: 'Speedtyper',
+  title: 'Ngetikcepat',
 
   link: [
     { rel: 'stylesheet', type: 'text/css', href: themeUrl },

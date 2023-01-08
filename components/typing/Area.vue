@@ -155,7 +155,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="typing-area w-full md:w-2/3 my-3 select-none py-10  text-6xl " tabindex="0">
+  <div class="typing-area w-full md:w-2/3 my-3 select-none py-10  text-6xl mx-auto " tabindex="0">
     <div ref="wordsWrapper" class="words-wrapper overflow-hidden  relative h-[225px]">
       <div ref="wordsGroup" class="words flex flex-wrap  absolute text-5xl" :style="wordsGroupStyle">
         <div class="caret" :style="caretStyles" />

@@ -7,8 +7,8 @@
       <div class="flex justify-between">
         <div class="menu-left">
           <h1 class="logo mt-0 mb-5">
-            <router-link to="/" class="text-white decoration-none italic">
-              Speedtyper
+            <router-link to="/" class="decoration-none italic">
+              Ngetikcepat
             </router-link>
           </h1>
         </div>
@@ -41,5 +41,8 @@
 <style scoped>
 .router-link-active {
     color: rgb(206, 206, 206)
+}
+.logo a {
+  color: var(--main-color)
 }
 </style>
