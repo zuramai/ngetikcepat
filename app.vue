@@ -5,7 +5,8 @@ import '~/assets/css/main.css'
 const theme = useTheme()
 const app = ref()
 
-const themeUrl = computed(() => `/themes/${theme.currentTheme.value}.css`)
+const config = useAppConfig()
+const themeUrl = computed(() => `${config.baseUrl}themes/${theme.currentTheme.value}.css`)
 
 useHead({
   title: 'Ngetikcepat',

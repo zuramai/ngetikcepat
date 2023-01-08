@@ -22,7 +22,8 @@ export const useTheme = () => {
   }
 
   onMounted(() => {
-    $fetch('/themes/_list.json')
+    const config = useAppConfig()
+    $fetch(`${config.baseUrl}themes/_list.json`)
       .then((res) => {
         themeList.value = res as Theme[]
       })

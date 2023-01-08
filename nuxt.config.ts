@@ -10,6 +10,9 @@ export default defineNuxtConfig({
       mode: 'out-in',
     },
   },
+  appConfig: {
+    baseUrl: process.env.NUXT_APP_BASE_URL || '/',
+  },
   modules: [
     '@unocss/nuxt',
     '@pinia/nuxt',

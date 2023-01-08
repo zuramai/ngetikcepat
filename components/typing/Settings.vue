@@ -14,7 +14,9 @@ const languageList = ref<Languages>([])
 const currentLanguage = computed(() => typingStore.options.language)
 
 onMounted(() => {
-  $fetch('/languages/_list.json')
+  const config = useAppConfig()
+  console.log('config', config.baseUrl)
+  $fetch(`${config.baseUrl}/languages/_list.json`)
     .then((res) => {
       languageList.value = res as Languages
     })

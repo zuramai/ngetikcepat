@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "NUXT_APP_BASE_URL=/ngetikcepat/ nuxt dev",
     "generate": "NUXT_APP_BASE_URL=/ngetikcepat/ nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",

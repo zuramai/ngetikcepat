@@ -29,8 +29,9 @@ export const useTypingData = () => {
   const fetchWords = () => {
     return new Promise<void>((resolve, reject) => {
       console.log('current words', words.value)
-      const folder = mode.value == 'quote' ? 'quotes' : 'languages'
-      fetch(`/${folder}/${language.value}.json`, { cache: 'force-cache' })
+      const folder = mode.value === 'quote' ? 'quotes' : 'languages'
+      const config = useAppConfig()
+      fetch(`${config.baseUrl}/${folder}/${language.value}.json`, { cache: 'force-cache' })
         .then(res => res.json())
         .then((res) => {
           if (mode.value == 'quote') {
