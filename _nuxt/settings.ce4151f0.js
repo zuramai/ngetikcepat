@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper.a1a6add7.js";import{a as s,o,b as t}from"./entry.081bc2c8.js";const c={},n={class:"page-settings"},a=t("div",{class:"container mx-auto px-25"},[t("h1",{class:"text-center text-5xl"}," Settings ")],-1),r=[a];function _(i,d){return o(),s("div",n,r)}const f=e(c,[["render",_]]);export{f as default};
