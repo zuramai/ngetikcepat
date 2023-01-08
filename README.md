@@ -1,42 +1,34 @@
-# Nuxt 3 Minimal Starter
+# Ngetikcepat
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+> 🚧 Currently under heavy development
 
-## Setup
+Ngetikcepat is a website to test your typing speed and you can also learn to type faster in this website.
 
-Make sure to install the dependencies:
 
-```bash
-# yarn
-yarn install
+## Installation
 
-# npm
-npm install
+1. Clone
 
-# pnpm
-pnpm install --shamefully-hoist
+```sh
+git clone https://github.com/zuramai/ngetikcepat 
+cd ngetikcepat
 ```
 
-## Development Server
+2. Install dependencies
 
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
+```sh
+pnpm install --shamefully-hoist 
+# OR npm install
+# OR yarn install
 ```
 
-## Production
+3. Run the application
 
-Build the application for production:
-
-```bash
-npm run build
+```sh
+pnpm run dev
 ```
+And open localhost:3000
 
-Locally preview production build:
+## Contribute
 
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+I welcome any kind of contribution to help this website become stable faster!
