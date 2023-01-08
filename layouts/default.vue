@@ -1,8 +1,12 @@
+<script lang="ts" setup>
+</script>
+
 <template>
   <div class="layout-default">
-    <layouts-ui-sidebar />
+    <LayoutsSidebar />
     <main>
-      <div class="px-25 container">
+      <div class="px-25 container mx-auto">
+        <LayoutsHeader />
         <slot />
       </div>
     </main>

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import 'normalize.css'
 import '~/assets/css/main.css'
-import UiHeader from './components/layouts/UiHeader.vue'
-import UiFooter from './components/layouts/UiFooter.vue'
 
 const theme = useTheme()
 const app = ref()
@@ -25,11 +23,10 @@ const keydown = () => {
 
 <template>
   <div id="app" ref="app" class="font-sans flex w-full flex-col min-h-screen">
-    <UiHeader />
     <NuxtLayout class="flex-grow">
       <NuxtPage />
     </NuxtLayout>
-    <UiFooter />
+    <LayoutsFooter />
   </div>
 </template>
 
