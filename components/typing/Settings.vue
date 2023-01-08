@@ -34,7 +34,7 @@ const nextLanguage = () => {
 
 <template>
   <div class="typing-settings flex justify-center">
-    <div class="settings-card flex-grow-0 rounded-lg my-5 text-sm p-1">
+    <div class="settings-card flex-grow-0 rounded-sm shadow-lg my-5 text-sm p-1">
       <h4 class="px-3 text-xl font-bold my-2">
         Typing Options
       </h4>

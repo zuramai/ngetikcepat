@@ -15,21 +15,21 @@
         <div class="menu-right">
           <ul class="flex items-center justify-end gap-5 list-none h-full p-0 my-0">
             <li>
-              <a href="https://github.com/zuramai/speedtyper" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/zuramai/ngetikcepat" target="_blank" rel="noopener noreferrer">
                 <div class="i-mdi:github w-6 h-6" />
               </a>
             </li>
             <li>
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <nuxt-link to="/settings" rel="noopener noreferrer">
                 <div class="i-mdi:cog w-6 h-6" />
-              </a>
+              </nuxt-link>
             </li>
             <li class="menu-separator h-[20px]! border-r " />
             <li>
-              <a href="#" target="_blank" class="flex gap-2 items-center">
+              <nuxt-link to="/auth/login" class="flex gap-2 items-center">
                 <div class="i-mdi:account w-6 h-6" />
                 <span>Login</span>
-              </a>
+              </nuxt-link>
             </li>
           </ul>
         </div>

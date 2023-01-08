@@ -1,5 +1,5 @@
 {
-  "name": "speedtyper",
+  "name": "ngetikcepat",
   "description": "Test your typing skills and race with your friends!",
   "author": {
     "name": "Saugi",
@@ -11,9 +11,9 @@
     "type": "individual",
     "url": "https://github.com/sponsors/zuramai/"
   },
-  "homepage": "https://github.com/zuramai/speedtyper#readme",
+  "homepage": "https://github.com/zuramai/ngetikcepat#readme",
   "bugs": {
-    "url": "https://github.com/zuramai/speedtyper/issues"
+    "url": "https://github.com/zuramai/ngetikcepat/issues"
   },
   "scripts": {
     "build": "nuxt build",
